@@ -3,6 +3,7 @@
 \PassOptionsToPackage{hyphens}{url}
 %
 \documentclass[jou]{apa7}
+
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
 \usepackage{iftex}
@@ -71,11 +72,11 @@
 \title{Example document with some references}
 \shorttitle{Example R Markdown APA doc}
 \leftheader{Dainer-Best et al.}
-\authorsnames[{1},{2},{2,3}]{Justin Dainer-Best,Second Author,Third
-Author}
+\authorsnames[{1},{2},{2,3},{1}]{Justin Dainer-Best,Second Author,Third
+Author,Fourth Author}
 \authorsaffiliations{{Bard College}
 ,{Other Institution}
-,{Third Institution}
+,{Yet another Institution}
 }
 \authornote{This is an author's note; you could remove it if not
 desired. You could include a corresponding author, and their email.}
@@ -83,6 +84,9 @@ desired. You could include a corresponding author, and their email.}
 \abstract{This is an example of creating an approximately APA-style
 manuscript using R Markdown and .bib files}
 \keywords{LaTeX, RMarkdown, Document formatting}
+
+
+
 
 \begin{document}
 \maketitle
@@ -94,18 +98,27 @@ This is a simple example of using R Markdown documents to create
 APA-formatted documents with LaTeX compiling them into PDFs. You will
 need to install a version of LaTeX to compile; some suggestions are
 included
-\href{https://bookdown.org/yihui/rmarkdown-cookbook/install-latex.html}{here},
-but if they do not work, you may want to install
-\href{http://tug.org/mactex/}{MacTeX} for Macs or
-\href{https://miktex.org/}{MiKTeX} for PCs. Of course, the Rmd document
-can also be compiled (knit) as an HTML file if you do not want to
-install a TeX distribution, but it will not follow APA style.
+\href{https://bookdown.org/yihui/rmarkdown-cookbook/install-latex.html}{here}
+which involve using \href{https://yihui.org/tinytex/}{TinyTeX}
+(\protect\hyperlink{ref-xie2019}{Xie, 2019}). You may need to install
+the \texttt{apa7} LaTeX package
+(\protect\hyperlink{ref-weiss2021}{Beitzel, 2021}); I believe you should
+be able to do so with \texttt{tinytex::tlmgr\_install("apa7")} (but I
+have not yet been able to test this on a machine without a LaTeX
+installation).
 
-You will have to compile your references in a bibliography. Most folks
-recommend using Zotero, as do I; you'll need to output your references
-to a .bib file. Document/article titles will follow the capitalization
-you've got---use APA style yourself! (The most recent versions of R
-Markdown can also
+If TinyTeX does not work for you or if you intend to use LaTeX beyond
+for this work, you may want to install
+\href{http://tug.org/mactex/}{MacTeX} for Macs or
+\href{https://miktex.org/}{MiKTeX} for PCs. (These are large
+installations---thus the point of a ``tiny'' version.)
+
+You will also have to compile your references in a bibliography. Most
+folks recommend using Zotero, as do I (manually maintaining references
+can be frustrating); you'll need to output your references to a .bib
+file. Document/article titles will follow the capitalization you've
+got---use APA style yourself! (The most recent versions of R Markdown
+can also
 \href{https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html}{help
 add your references}, including just from a DOI link.)
 
@@ -115,8 +128,8 @@ create APA-draft manuscripts, but may introduce extra details beyond the
 basic style. The style I lay out here will simply create a document
 using APA formatting of references.
 
-\hypertarget{installation}{%
-\section{Installation}\label{installation}}
+\hypertarget{getting-started}{%
+\section{Getting started}\label{getting-started}}
 
 You will need to download the \texttt{apa.csl} and \texttt{template.tex}
 documents into a directory where your Rmd file lives. Open (or create)
@@ -144,14 +157,13 @@ so forth, are implemented in APA style documents.
 
 \begin{verbatim}
 ---
-doctype: jou # this can be stu, jou, doc, or man
+doctype: man # this can be stu, jou, doc, or man
 title: "Your title"
 author: 
   - name: "Your name"
     affiliation_number: 1
-    affiliation: "Your affiliation"
+affiliations: "Your affiliation"
 shorttitle: "APA short title"
-leftheader: "Authors' last names (for jou doctype only)"
 authors_note: |
   This is an author's note; 
   you could remove it if not desired. 
@@ -161,12 +173,123 @@ date: "3/29/21"
 output: 
   pdf_document:
     template: "template.tex"
-bibliography: example.bib # update to be your .bib file!
+bibliography: example.bib # update to your .bib file!
 csl: apa.csl
 ---
 \end{verbatim}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+A minimal example is included (minimal\_example.Rmd and
+minimal\_example.pdf) with these headers; feel free to download it and
+adapt. Without any changes, it will make the PDF you can see here, so
+long as you have installed LaTeX---and downloaded the template.tex and
+apa.csl files into the same directory.
+
+If you look at example.Rmd, you'll see how to include multiple authors
+with differing affiliations. List each author separately. Including
+\texttt{affiliation\_number} will provide a superscript number after
+that name, which then anticipates a subsequent item under
+\texttt{affiliations}. (If there are three
+\texttt{affiliation\_number}s, there should be three listed
+\texttt{affiliations}.) If an author has multiple affiliations, simply
+enclose the numbers in quotation marks, as below, separated with a
+comma: ``2,3.''
+
+\begin{verbatim}
+author: 
+  - name: "First Author"
+    affiliation_number: 1
+  - name: "Second Author"
+    affiliation_number: 2
+  - name: "Third Author"
+    affiliation_number: "2,3"
+  - name: "Fourth Author"
+    affiliation_number: 1
+affiliations:
+  - "First Institution"
+  - "Other Institution"
+  - "Yet another Institution"
+\end{verbatim}
+
+As described below, there are some additional headers you may include:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{leftheader}: The authors' last names (for \texttt{jou} doctype
+  only)
+\item
+  For the \texttt{stu} doctype, info about the course:
+  \texttt{professor}, \texttt{course}, and \texttt{duedate}
+\end{itemize}
+
+There are additional YAML headers often used for different documents in
+R Markdown, many of which may work here.
+
+\hypertarget{document-types}{%
+\section{Document types}\label{document-types}}
+
+The \textbf{\{apa7\}} document class in LaTeX accepts four document
+types---they're mentioned briefly above under \texttt{doctype}; you can
+try each out. Here's what they are:
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{jou}: journal style; intended to mimic what a journal looks like
+  (two columns, etc). This will look weird with the minimal\_example
+  file---it looks better with a longer file -- this will also make use
+  of the YAML \texttt{leftheader} and \texttt{shorttitle}, which will
+  alternate page headers.
+\item
+  \emph{doc}: a one-column PDF output with APA style (including
+  abstract, etc); it will try to be the ``easiest to read''
+\item
+  \emph{man}: APA's suggestion for how to submit documents to a
+  journal---what many instructors ask for in college course, with
+  double-spacing and so forth
+\item
+  \emph{stu}: student papers---includes YAML headers \texttt{professor},
+  \texttt{course}, and \texttt{duedate}; otherwise much like
+  \texttt{man}
+\end{itemize}
+
+I've created versions of this Rmd file with each document style, so you
+can see what they might look like.
+
+\hypertarget{writing-in-an-r-markdown-file}{%
+\section{Writing in an R Markdown
+file}\label{writing-in-an-r-markdown-file}}
+
+Now that you have a working R Markdown file, you've chosen a document
+type, and you've updated it with your paper title and name, etc., your
+focus is on writing the document!
+
+If you've ever looked into LaTeX document writing, this is more simple.
+There are three major things to keep in mind:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Use \# to start a section, \#\# to start a subsection, etc.
+\item
+  Use square brackets {[}{]} to enclose references, e.g.,
+  \texttt{{[}@referencekey{]}}, where you precede a key with the @
+  symbol. The ``reference key'' is the way it will be referred in your
+  .bib file---in example.bib, for example, you'll see that it's the
+  first word of each entry. For more info on citations,
+  \href{https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html\#citations}{see
+  here}.
+\end{enumerate}
+
+Most other formatting will be done for you. If you want to learn things
+about formatting in R Markdown, there are a variety of
+\href{https://rmarkdown.rstudio.com/lesson-15.html}{cheatsheets}
+available; you can refer to the example.Rmd document here to learn about
+links, lists, \emph{italics} or \textbf{bold-face text}, etc.
+
+\hypertarget{wrapping-up}{%
+\section{Wrapping up}\label{wrapping-up}}
 
 You needn't write anything below the title of your references
 section---the bibliography will be automatically generated. If you
@@ -183,6 +306,17 @@ surrounding it with curly brackets to ensure
 \leavevmode\hypertarget{ref-austbarth2020}{}%
 Aust, F., \& Barth, M. (2020). \emph{{papaja}: {Create} {APA}
 manuscripts with {R Markdown}}. \url{https://github.com/crsh/papaja}
+
+\leavevmode\hypertarget{ref-weiss2021}{}%
+Beitzel, B. D. (2021). \emph{Formatting documents in {APA} style (7th
+{E}dition) with the apa7 LaTeX class}.
+\url{http://ctan.math.washington.edu/tex-archive/macros/latex/contrib/apa7/apa7.pdf}
+
+\leavevmode\hypertarget{ref-xie2019}{}%
+Xie, Y. (2019). TinyTeX: A lightweight, cross-platform, and
+easy-to-maintain LaTeX distribution based on TeX live. \emph{TUGboat},
+\emph{1}, 30--32.
+\url{http://tug.org/TUGboat/Contents/contents40-1.html}
 
 \end{CSLReferences}
 
