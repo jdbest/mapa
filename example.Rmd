@@ -33,13 +33,15 @@ csl: apa.csl
 
 # Introduction
 
-This is a simple example of using R Markdown documents to create APA-formatted documents with LaTeX compiling them into PDFs. You will need to install a version of LaTeX to compile; some suggestions are included [here](https://bookdown.org/yihui/rmarkdown-cookbook/install-latex.html), but if they do not work, you may want to install [MacTeX](http://tug.org/mactex/) for Macs or [MiKTeX](https://miktex.org/) for PCs. Of course, the Rmd document can also be compiled (knit) as an HTML file if you do not want to install a TeX distribution, but it will not follow APA style.
+This is a simple example of using R Markdown documents to create APA-formatted documents with LaTeX compiling them into PDFs. You will need to install a version of LaTeX to compile; some suggestions are included [here](https://bookdown.org/yihui/rmarkdown-cookbook/install-latex.html) which involve using [TinyTeX](https://yihui.org/tinytex/). You may need to install the `apa7` LaTeX package; I believe you should be able to do so with `tinytex::tlmgr_install("apa7")` (but I have not yet been able to test this on a machine without a LaTeX installation).
 
-You will have to compile your references in a bibliography. Most folks recommend using Zotero, as do I; you'll need to output your references to a .bib file. Document/article titles will follow the capitalization you've got---use APA style yourself! (The most recent versions of R Markdown can also [help add your references](https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html), including just from a DOI link.)
+If TinyTeX does not work for you or if you intend to use LaTeX beyond for this work, you may want to install [MacTeX](http://tug.org/mactex/) for Macs or [MiKTeX](https://miktex.org/) for PCs. (These are large installations---thus the point of a "tiny" version.)
+
+You will also have to compile your references in a bibliography. Most folks recommend using Zotero, as do I (manually maintaining references can be frustrating); you'll need to output your references to a .bib file. Document/article titles will follow the capitalization you've got---use APA style yourself! (The most recent versions of R Markdown can also [help add your references](https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html), including just from a DOI link.)
 
 Some packages (e.g., {[papaja](https://github.com/crsh/papaja)}; [@austbarth2020]) will create APA-draft manuscripts, but may introduce extra details beyond the basic style. The style I lay out here will simply create a document using APA formatting of references. 
 
-# Installation
+# Getting started
 
 You will need to download the `apa.csl` and `template.tex` documents into a directory where your Rmd file lives. Open (or create) your R Markdown document.
 
@@ -58,7 +60,7 @@ You can keep the title and date, but you will need to update the others headers 
 
 ```
 ---
-doctype: jou # this can be stu, jou, doc, or man
+doctype: man # this can be stu, jou, doc, or man
 title: "Your title"
 author: 
   - name: "Your name"
@@ -79,6 +81,13 @@ bibliography: example.bib # update to your .bib file!
 csl: apa.csl
 ---
 ```
+
+A minimal example is included (minimal_example.Rmd and minimal_example.pdf) with these headers; feel free to download it and adapt. Without any changes, it will make the PDF you can see here, so long as you have installed LaTeX---and downloaded the template.tex and apa.csl files into the same directory. 
+
+# Writing in an R Markdown file
+
+
+
 ---
 
 You needn't write anything below the title of your references section---the bibliography will be automatically generated. If you notice that something is inappropriately not capitalized, make sure it is capitalized correctly in your .bib file; if it is, consider surrounding it with curly brackets to ensure
