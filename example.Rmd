@@ -34,15 +34,19 @@ link-citations: true
 csl: apa.csl
 ---
 
-# Introduction
-
 This is a simple example of using R Markdown documents to create APA-formatted documents with LaTeX compiling them into PDFs. You will need to install a version of LaTeX to compile; some suggestions are included [here](https://bookdown.org/yihui/rmarkdown-cookbook/install-latex.html) which involve using [TinyTeX](https://yihui.org/tinytex/) [@xie2019]. You may need to install the `apa7` LaTeX package [@weiss2021]; I believe you should be able to do so with `tinytex::tlmgr_install("apa7")` (but I have not yet been able to test this on a machine without a LaTeX installation).
 
 If TinyTeX does not work for you or if you intend to use LaTeX beyond for this work, you may want to install [MacTeX](http://tug.org/mactex/) for Macs or [MiKTeX](https://miktex.org/) for PCs. (These are large installations---thus the point of a "tiny" version.)
 
 You will also have to compile your references in a bibliography. Most folks recommend using Zotero, as do I (manually maintaining references can be frustrating); you'll need to output your references to a .bib file. Document/article titles will follow the capitalization you've got---use APA style yourself! (The most recent versions of R Markdown can also [help add your references](https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html), including just from a DOI link.)
 
-Some packages (e.g., {[papaja](https://github.com/crsh/papaja)}; [@austbarth2020]) will create APA-draft manuscripts, but may introduce extra details beyond the basic style. The style I lay out here will simply create a document using APA formatting of references. 
+Some packages [e.g., {[papaja](https://github.com/crsh/papaja)}, @austbarth2020] will create APA-draft manuscripts, but may introduce extra details beyond the basic style. The style I lay out here will simply create a document using APA formatting of references. 
+
+# Why would I want to use this template?
+
+You might think it's fun to lay your document out in R Markdown! You might also want to report the results of tests directly into your document, or include graphs. You might also be procrastinating finishing a paper, and that's fine, too. 
+
+I make no promises that this document will help yuou achieve "perfect" APA style---you'll need to double-check everything, especially your references. (In particular, if you are a student, make sure that this style conforms to any course/assignment requirements.)
 
 # Getting started
 
@@ -84,7 +88,7 @@ csl: apa.csl
 ---
 ```
 
-A minimal example is included (minimal_example.Rmd and minimal_example.pdf) with these headers; feel free to download it and adapt. Without any changes, it will make the PDF you can see here, so long as you have installed LaTeX---and downloaded the template.tex and apa.csl files into the same directory. 
+A minimal example is included (minimal_example.Rmd and minimal_example.pdf) with these headers; feel free to download it and adapt. Without any changes, knitting it in R Markdown will make the PDF you can see here, so long as you have installed LaTeX---and downloaded the template.tex and apa.csl files into the same directory. (How to knit? Hit the "Knit" button in R Studio with the Rmd file open, or hit CMD+Shift+K / Ctrl+Shift+K.)
 
 If you look at example.Rmd, you'll see how to include multiple authors with differing affiliations. List each author separately. Including `affiliation_number` will provide a superscript number after that name, which then anticipates a subsequent item under `affiliations`. (If there are three `affiliation_number`s, there should be three listed `affiliations`.) If an author has multiple affiliations, simply enclose the numbers in quotation marks, as below, separated with a comma: "2,3".
 
@@ -133,9 +137,88 @@ If you've ever looked into LaTeX document writing, this is more simple. There ar
 
 Most other formatting will be done for you. If you want to learn things about formatting in R Markdown, there are a variety of [cheatsheets](https://rmarkdown.rstudio.com/lesson-15.html) available; you can refer to the example.Rmd document here to learn about links, lists, _italics_ or **bold-face text**, etc.
 
+# Including plots
+
+As above, you can refer to the R Markdown cheatsheets to learn how to include pre-existing images. If you'd like to include *plots*, it's as easy as including a code chunk and using R code to create the figure (this uses the {_palmerpenguins_} and {_ggplot2_} packages by @horst2020 and @wickham2016, respectively, and code from the first.) Including `echo=FALSE, warning=FALSE` means that the plot is printed but the code is not. If `echo` were TRUE, the code would also be printed. 
+
+R Markdown and LaTeX will try their best to fit the plot into the space allotted to it; you can play around with size by specifying a `out.width` in percentages or inches, as I show here. You may read about more options [here](https://bookdown.org/yihui/rmarkdown/pdf-document.html#figure-options-1), but note that full-page figures may be difficult when `doctype` is set as `jou`. (LaTeX solutions may not work unless you manually edit the .tex file to change environments, for example.)
+
+The below code produces the figure included in this document. Note that LaTeX places figures as best as it can---sometimes on a subsequent page. Also note that the first line, beginning with three ticks, and ending with a closing curly bracket }, should all be on one line. 
+
+````
+```{r, echo=FALSE, warning=FALSE, fig.cap = 
+"Flipper length and body mass for Adelie, 
+Chinstrap and Gentoo Penguins.", out.width="100%"}`r ''`
+library(palmerpenguins); library(ggplot2)
+ggplot(penguins, aes(x = flipper_length_mm, 
+                     y = body_mass_g)) +
+  geom_point(aes(color = species, 
+                 shape = species),
+             size = 3,
+             alpha = 0.8) +
+  theme_minimal() +
+  scale_color_manual(values = c("darkorange",
+                                "purple",
+                                "cyan4")) +
+  labs(title = "Penguin size, Palmer Station
+                LTER",
+       x = "Flipper length (mm)",
+       y = "Body mass (g)",
+       color = "Penguin species",
+       shape = "Penguin species") +
+  theme(legend.position = c(0.2, 0.7),
+        legend.background = 
+          element_rect(fill = "white",
+                       color = NA),
+        plot.title.position = "plot",
+        plot.caption = 
+           element_text(hjust = 0, 
+                        face= "italic"),
+        plot.caption.position = "plot")
+```
+````
+
+```{r, echo=FALSE, warning=FALSE, fig.cap = "Flipper length and body mass for Adelie, Chinstrap and Gentoo Penguins.", out.width="100%"}
+if(! "palmerpenguins" %in% installed.packages()) {
+  install.packages("palmerpenguins")
+}
+if(! "ggplot2" %in% installed.packages()) {
+  install.packages("ggplot2")
+  }
+library(palmerpenguins); library(ggplot2)
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = species, 
+                 shape = species),
+             size = 3,
+             alpha = 0.8) +
+  theme_minimal() +
+  scale_color_manual(values = c("darkorange","purple","cyan4")) +
+  labs(title = "Penguin size, Palmer Station LTER",
+       x = "Flipper length (mm)",
+       y = "Body mass (g)",
+       color = "Penguin species",
+       shape = "Penguin species") +
+  theme(legend.position = c(0.2, 0.7),
+        legend.background = element_rect(fill = "white", color = NA),
+        plot.title.position = "plot",
+        plot.caption = element_text(hjust = 0, face= "italic"),
+        plot.caption.position = "plot")
+```
+
+
+There are many great R packages for writing LaTeX tables in R; I won't cover them here, but they include {_[gt](https://gt.rstudio.com/index.html)_}, {_[gtsummary](https://www.danieldsjoberg.com/gtsummary/)_}, and {_stargazer_}.
+
+# More information
+
+The reader hoping for more information should review some of the following books:
+
+* [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/) by Yihui Xie, J. J. Allaire, Garrett Grolemund
+* [R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/) by Yihui Xie, Christophe Dervieux, & Emily Riederer
+* [bookdown: Authoring Books and Technical Documents with R Markdown](https://bookdown.org/yihui/bookdown/) by Yihui Xie
+
 # Wrapping up
 
-You needn't write anything below the title of your references section---the bibliography will be automatically generated. If you notice that something is inappropriately not capitalized, make sure it is capitalized correctly in your .bib file; if it is, consider surrounding it with curly brackets to ensure
+You needn't write anything below the title of your references section---the bibliography will be automatically generated. If you notice that something is inappropriately not capitalized, make sure it is capitalized correctly in your .bib file; if it is, consider surrounding it with curly brackets to ensure the correct formatting.
 
 # References
 
