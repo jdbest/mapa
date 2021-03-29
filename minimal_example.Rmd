@@ -4,7 +4,7 @@ title: "Your title"
 author: 
   - name: "Your name"
     affiliation_number: 1
-    affiliation: "Your affiliation"
+affiliations: "Your affiliation"
 shorttitle: "APA short title"
 leftheader: "Authors' last names (for jou doctype)"
 authors_note: |
