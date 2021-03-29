@@ -8,7 +8,7 @@ If TinyTeX does not work for you or if you intend to use LaTeX beyond for this w
 
 You will also have to compile your references in a bibliography. Most folks recommend using Zotero, as do I (manually maintaining references can be frustrating); you'll need to output your references to a .bib file. Document/article titles will follow the capitalization you've got---use APA style yourself! (The most recent versions of R Markdown can also [help add your references](https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html), including just from a DOI link.)
 
-Some packages (e.g., {[papaja](https://github.com/crsh/papaja)}; Aust & Barth, 2020) will create APA-draft manuscripts, but may introduce extra details beyond the basic style. The style I lay out here will simply create a document using APA formatting of references. 
+Some packages (e.g., {_[papaja](https://github.com/crsh/papaja)_}; Aust & Barth, 2020) will create APA-draft manuscripts, but may introduce extra details beyond the basic style. The style I lay out here will simply create a document using APA formatting of references. 
 
 # Why would I want to use this template?
 
