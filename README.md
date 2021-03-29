@@ -1,7 +1,8 @@
 # Git Markdown example
 
-This is a simple example of using R Markdown documents to create APA-formatted documents with LaTeX compiling them into PDFs. You will need to install a version of LaTeX to compile; some suggestions are included [here](https://bookdown.org/yihui/rmarkdown-cookbook/install-latex.html) which involve using [TinyTeX](https://yihui.org/tinytex/) (Xie, 2019). You may need to install the `apa7` LaTeX package (Weiss, 2021); I believe you should be able to do so with `tinytex::tlmgr_install("apa7")` (but I have not yet been able to test this on a machine without a LaTeX installation).
+(This text replicates the text in example.* included above. Where possible, links to documents on github are included here, but plots are not.)
 
+This is a simple example of using R Markdown documents to create APA-formatted documents with LaTeX compiling them into PDFs. You will need to install a version of LaTeX to compile; some suggestions are included [here](https://bookdown.org/yihui/rmarkdown-cookbook/install-latex.html) which involve using [TinyTeX](https://yihui.org/tinytex/) (Xie, 2019). You may need to install the `apa7` LaTeX package (Weiss, 2021); I believe you should be able to do so with `tinytex::tlmgr_install("apa7")` (but I have not yet been able to test this on a machine without a LaTeX installation).
 
 If TinyTeX does not work for you or if you intend to use LaTeX beyond for this work, you may want to install [MacTeX](http://tug.org/mactex/) for Macs or [MiKTeX](https://miktex.org/) for PCs. (These are large installations---thus the point of a "tiny" version.)
 
@@ -17,7 +18,7 @@ I make no promises that this document will help yuou achieve "perfect" APA style
 
 # Getting started
 
-You will need to download the `apa.csl` and `template.tex` documents into a directory where your Rmd file lives. Open (or create) your R Markdown document.
+You will need to download the [`apa.csl`](https://github.com/jdbest/Git_Markdown_example/blob/master/apa.csl) and [`template.tex`](https://github.com/jdbest/Git_Markdown_example/blob/master/template.tex) documents into a directory where your Rmd file lives. Open (or create) your R Markdown document.
 
 Your document will automatically include some YAML headers:
 
@@ -55,9 +56,9 @@ csl: apa.csl
 ---
 ```
 
-A minimal example is included (minimal_example.Rmd and minimal_example.pdf) with these headers; feel free to download it and adapt. Without any changes, knitting it in R Markdown will make the PDF you can see here, so long as you have installed LaTeX---and downloaded the template.tex and apa.csl files into the same directory. (How to knit? Hit the "Knit" button in R Studio with the Rmd file open, or hit CMD+Shift+K / Ctrl+Shift+K.)
+A minimal example is included ([minimal_example.Rmd](https://github.com/jdbest/Git_Markdown_example/blob/master/minimal_example.Rmd) and [minimal_example.pdf](https://github.com/jdbest/Git_Markdown_example/blob/master/minimal_example.pdf)) with these headers; feel free to download it and adapt. Without any changes, knitting it in R Markdown will make the PDF you can see here, so long as you have installed LaTeX---and downloaded the template.tex and apa.csl files into the same directory. (How to knit? Hit the "Knit" button in R Studio with the Rmd file open, or hit CMD+Shift+K / Ctrl+Shift+K.)
 
-If you look at example.Rmd, you'll see how to include multiple authors with differing affiliations. List each author separately. Including `affiliation_number` will provide a superscript number after that name, which then anticipates a subsequent item under `affiliations`. (If there are three `affiliation_number`s, there should be three listed `affiliations`.) If an author has multiple affiliations, simply enclose the numbers in quotation marks, as below, separated with a comma: "2,3".
+If you look at [example.Rmd](https://github.com/jdbest/Git_Markdown_example/blob/master/example.Rmd), you'll see how to include multiple authors with differing affiliations. List each author separately. Including `affiliation_number` will provide a superscript number after that name, which then anticipates a subsequent item under `affiliations`. (If there are three `affiliation_number`s, there should be three listed `affiliations`.) If an author has multiple affiliations, simply enclose the numbers in quotation marks, as below, separated with a comma: "2,3".
 
 ```
 author: 
@@ -91,7 +92,7 @@ The **{apa7}** document class in LaTeX accepts four document types---they're men
 * _man_: APA's suggestion for how to submit documents to a journal---what many instructors ask for in college course, with double-spacing and so forth
 * _stu_: student papers---includes YAML headers `professor`, `course`, and `duedate`; otherwise much like `man`
 
-I've created versions of this Rmd file with each document style, so you can see what they might look like.
+I've created versions of this Rmd file with each document style, so you can see what they might look like: [example_jou.pdf](https://github.com/jdbest/Git_Markdown_example/blob/master/example_jou.pdf), [example_doc.pdf](https://github.com/jdbest/Git_Markdown_example/blob/master/example_doc.pdf), [example_man.pdf](https://github.com/jdbest/Git_Markdown_example/blob/master/example_man.pdf), & [example_stu.pdf](https://github.com/jdbest/Git_Markdown_example/blob/master/example_stu.pdf).
 
 # Writing in an R Markdown file
 
@@ -100,7 +101,7 @@ Now that you have a working R Markdown file, you've chosen a document type, and 
 If you've ever looked into LaTeX document writing, this is more simple. There are three major things to keep in mind:
 
 1. Use \# to start a section, \## to start a subsection, etc.
-2. Use square brackets [] to enclose references, e.g., `[@referencekey]`, where you precede a key with the @ symbol. The "reference key" is the way it will be referred in your .bib file---in example.bib, for example, you'll see that it's the first word of each entry. For more info on citations, [see here](https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html#citations).
+2. Use square brackets [] to enclose references, e.g., `[@referencekey]`, where you precede a key with the @ symbol. The "reference key" is the way it will be referred in your .bib file---in [example.bib](https://github.com/jdbest/Git_Markdown_example/blob/master/example.bib), for example, you'll see that it's the first word of each entry. For more info on citations, [see here](https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html#citations).
 
 Most other formatting will be done for you. If you want to learn things about formatting in R Markdown, there are a variety of [cheatsheets](https://rmarkdown.rstudio.com/lesson-15.html) available; you can refer to the example.Rmd document here to learn about links, lists, _italics_ or **bold-face text**, etc.
 
