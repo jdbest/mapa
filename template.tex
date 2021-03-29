@@ -13,29 +13,7 @@ $if(CJKmainfont)$
 \PassOptionsToPackage{space}{xeCJK}
 $endif$
 %
-\documentclass[
-$if(fontsize)$
-  $fontsize$,
-$endif$
-$if(lang)$
-  $babel-lang$,
-$endif$
-$if(papersize)$
-  $papersize$paper,
-$endif$
-$if(beamer)$
-  ignorenonframetext,
-$if(handout)$
-  handout,
-$endif$
-$if(aspectratio)$
-  aspectratio=$aspectratio$,
-$endif$
-$endif$
-$for(classoption)$
-  $classoption$$sep$,
-$endfor$
-]{$documentclass$}
+\documentclass[$doctype$]{apa7}
 $if(beamer)$
 $if(background-image)$
 \usebackgroundtemplate{%
@@ -401,36 +379,18 @@ $endif$
 $if(title)$
 \title{$title$$if(thanks)$\thanks{$thanks$}$endif$}
 $endif$
-$if(subtitle)$
-$if(beamer)$
-$else$
-\usepackage{etoolbox}
-\makeatletter
-\providecommand{\subtitle}[1]{% add subtitle to \maketitle
-  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+$if(shorttitle)$\shorttitle{$shorttitle$}$endif$
+$if(leftheader)$\leftheader{$leftheader$}$endif$
+\authorsnames[$for(author)$$if(author.affiliation_number)${$author.affiliation_number$}$endif$$sep$,$endfor$]{$for(author)$$if(author.name)$$author.name$$else$$author$$endif$$sep$,$endfor$}
+\authorsaffiliations{$for(author)$
+$if(author.affiliation)$
+{$author.affiliation$}
+$endif$$sep$,$endfor$
 }
-\makeatother
-$endif$
-\subtitle{$subtitle$}
-$endif$
-\author{$for(author)$
-$if(author.name)$
-$author.name$$if(author.affiliation)$ ($author.affiliation$)$if(author.email)$, $author.email$$endif$$endif$
-$else$
-$author$
-$endif$$sep$ \and $endfor$}
+\authornote{$if(authors_note)$$authors_note$$endif$}
 \date{$date$}
-$if(beamer)$
-$if(institute)$
-\institute{$for(institute)$$institute$$sep$ \and $endfor$}
-$endif$
-$if(titlegraphic)$
-\titlegraphic{\includegraphics{$titlegraphic$}}
-$endif$
-$if(logo)$
-\logo{\includegraphics{$logo$}}
-$endif$
-$endif$
+$if(abstract)$\abstract{$abstract$}$endif$
+$if(keywords)$\keywords{$keywords$}$endif$
 
 \begin{document}
 $if(has-frontmatter)$
@@ -441,14 +401,6 @@ $if(beamer)$
 \frame{\titlepage}
 $else$
 \maketitle
-$endif$
-$if(abstract)$
-\begin{abstract}
-$abstract$
-$if(keywords)$
-\vskip 8.5pt \noindent \emph{Keywords}: $keywords$ \par
-$endif$
-\end{abstract}
 $endif$
 $endif$
 
