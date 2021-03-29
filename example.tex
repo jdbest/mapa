@@ -91,9 +91,6 @@ manuscript using R Markdown and .bib files}
 \begin{document}
 \maketitle
 
-\hypertarget{introduction}{%
-\section{Introduction}\label{introduction}}
-
 This is a simple example of using R Markdown documents to create
 APA-formatted documents with LaTeX compiling them into PDFs. You will
 need to install a version of LaTeX to compile; some suggestions are
@@ -122,11 +119,25 @@ can also
 \href{https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html}{help
 add your references}, including just from a DOI link.)
 
-Some packages (e.g., \{\href{https://github.com/crsh/papaja}{papaja}\};
-(\protect\hyperlink{ref-austbarth2020}{Aust \& Barth, 2020})) will
-create APA-draft manuscripts, but may introduce extra details beyond the
-basic style. The style I lay out here will simply create a document
-using APA formatting of references.
+Some packages (e.g., \{\href{https://github.com/crsh/papaja}{papaja}\},
+\protect\hyperlink{ref-austbarth2020}{Aust \& Barth, 2020}) will create
+APA-draft manuscripts, but may introduce extra details beyond the basic
+style. The style I lay out here will simply create a document using APA
+formatting of references.
+
+\hypertarget{why-would-i-want-to-use-this-template}{%
+\section{Why would I want to use this
+template?}\label{why-would-i-want-to-use-this-template}}
+
+You might think it's fun to lay your document out in R Markdown! You
+might also want to report the results of tests directly into your
+document, or include graphs. You might also be procrastinating finishing
+a paper, and that's fine, too.
+
+I make no promises that this document will help yuou achieve ``perfect''
+APA style---you'll need to double-check everything, especially your
+references. (In particular, if you are a student, make sure that this
+style conforms to any course/assignment requirements.)
 
 \hypertarget{getting-started}{%
 \section{Getting started}\label{getting-started}}
@@ -180,9 +191,11 @@ csl: apa.csl
 
 A minimal example is included (minimal\_example.Rmd and
 minimal\_example.pdf) with these headers; feel free to download it and
-adapt. Without any changes, it will make the PDF you can see here, so
-long as you have installed LaTeX---and downloaded the template.tex and
-apa.csl files into the same directory.
+adapt. Without any changes, knitting it in R Markdown will make the PDF
+you can see here, so long as you have installed LaTeX---and downloaded
+the template.tex and apa.csl files into the same directory. (How to
+knit? Hit the ``Knit'' button in R Studio with the Rmd file open, or hit
+CMD+Shift+K / Ctrl+Shift+K.)
 
 If you look at example.Rmd, you'll see how to include multiple authors
 with differing affiliations. List each author separately. Including
@@ -288,6 +301,97 @@ about formatting in R Markdown, there are a variety of
 available; you can refer to the example.Rmd document here to learn about
 links, lists, \emph{italics} or \textbf{bold-face text}, etc.
 
+\hypertarget{including-plots}{%
+\section{Including plots}\label{including-plots}}
+
+As above, you can refer to the R Markdown cheatsheets to learn how to
+include pre-existing images. If you'd like to include \emph{plots}, it's
+as easy as including a code chunk and using R code to create the figure
+(this uses the \{\emph{palmerpenguins}\} and \{\emph{ggplot2}\} packages
+by \protect\hyperlink{ref-horst2020}{Horst et al.}
+(\protect\hyperlink{ref-horst2020}{2020}) and
+\protect\hyperlink{ref-wickham2016}{Wickham}
+(\protect\hyperlink{ref-wickham2016}{2016}), respectively, and code from
+the first.) Including \texttt{echo=FALSE,\ warning=FALSE} means that the
+plot is printed but the code is not. If \texttt{echo} were TRUE, the
+code would also be printed.
+
+R Markdown and LaTeX will try their best to fit the plot into the space
+allotted to it; you can play around with size by specifying a
+\texttt{out.width} in percentages or inches, as I show here. You may
+read about more options
+\href{https://bookdown.org/yihui/rmarkdown/pdf-document.html\#figure-options-1}{here},
+but note that full-page figures may be difficult when \texttt{doctype}
+is set as \texttt{jou}. (LaTeX solutions may not work unless you
+manually edit the .tex file to change environments, for example.)
+
+The below code produces the figure included in this document. Note that
+LaTeX places figures as best as it can---sometimes on a subsequent page.
+Also note that the first line, beginning with three ticks, and ending
+with a closing curly bracket \}, should all be on one line.
+
+\begin{verbatim}
+```{r, echo=FALSE, warning=FALSE, fig.cap = 
+"Flipper length and body mass for Adelie, 
+Chinstrap and Gentoo Penguins.", out.width="100%"}
+library(palmerpenguins); library(ggplot2)
+ggplot(penguins, aes(x = flipper_length_mm, 
+                     y = body_mass_g)) +
+  geom_point(aes(color = species, 
+                 shape = species),
+             size = 3,
+             alpha = 0.8) +
+  theme_minimal() +
+  scale_color_manual(values = c("darkorange",
+                                "purple",
+                                "cyan4")) +
+  labs(title = "Penguin size, Palmer Station
+                LTER",
+       x = "Flipper length (mm)",
+       y = "Body mass (g)",
+       color = "Penguin species",
+       shape = "Penguin species") +
+  theme(legend.position = c(0.2, 0.7),
+        legend.background = 
+          element_rect(fill = "white",
+                       color = NA),
+        plot.title.position = "plot",
+        plot.caption = 
+           element_text(hjust = 0, 
+                        face= "italic"),
+        plot.caption.position = "plot")
+```
+\end{verbatim}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{example_files/figure-latex/unnamed-chunk-1-1} \caption{Flipper length and body mass for Adelie, Chinstrap and Gentoo Penguins.}\label{fig:unnamed-chunk-1}
+\end{figure}
+
+There are many great R packages for writing LaTeX tables in R; I won't
+cover them here, but they include
+\{\emph{\href{https://gt.rstudio.com/index.html}{gt}}\},
+\{\emph{\href{https://www.danieldsjoberg.com/gtsummary/}{gtsummary}}\},
+and \{\emph{stargazer}\}.
+
+\hypertarget{more-information}{%
+\section{More information}\label{more-information}}
+
+The reader hoping for more information should review some of the
+following books:
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://bookdown.org/yihui/rmarkdown/}{R Markdown: The
+  Definitive Guide} by Yihui Xie, J. J. Allaire, Garrett Grolemund
+\item
+  \href{https://bookdown.org/yihui/rmarkdown-cookbook/}{R Markdown
+  Cookbook} by Yihui Xie, Christophe Dervieux, \& Emily Riederer
+\item
+  \href{https://bookdown.org/yihui/bookdown/}{bookdown: Authoring Books
+  and Technical Documents with R Markdown} by Yihui Xie
+\end{itemize}
+
 \hypertarget{wrapping-up}{%
 \section{Wrapping up}\label{wrapping-up}}
 
@@ -295,7 +399,7 @@ You needn't write anything below the title of your references
 section---the bibliography will be automatically generated. If you
 notice that something is inappropriately not capitalized, make sure it
 is capitalized correctly in your .bib file; if it is, consider
-surrounding it with curly brackets to ensure
+surrounding it with curly brackets to ensure the correct formatting.
 
 \hypertarget{references}{%
 \section*{References}\label{references}}
@@ -311,6 +415,15 @@ manuscripts with {R Markdown}}. \url{https://github.com/crsh/papaja}
 Beitzel, B. D. (2021). \emph{Formatting documents in {APA} style (7th
 {E}dition) with the apa7 LaTeX class}.
 \url{http://ctan.math.washington.edu/tex-archive/macros/latex/contrib/apa7/apa7.pdf}
+
+\leavevmode\hypertarget{ref-horst2020}{}%
+Horst, A. M., Hill, A. P., \& Gorman, K. B. (2020).
+\emph{Palmerpenguins: Palmer archipelago (antarctica) penguin data}.
+\url{https://allisonhorst.github.io/palmerpenguins/}
+
+\leavevmode\hypertarget{ref-wickham2016}{}%
+Wickham, H. (2016). \emph{ggplot2: Elegant graphics for data analysis}.
+Springer-Verlag New York. \url{https://ggplot2.tidyverse.org}
 
 \leavevmode\hypertarget{ref-xie2019}{}%
 Xie, Y. (2019). TinyTeX: A lightweight, cross-platform, and
