@@ -14,59 +14,7 @@ $if(CJKmainfont)$
 $endif$
 %
 \documentclass[$doctype$]{apa7}
-$if(beamer)$
-$if(background-image)$
-\usebackgroundtemplate{%
-  \includegraphics[width=\paperwidth]{$background-image$}%
-}
-$endif$
-\usepackage{pgfpages}
-\setbeamertemplate{caption}[numbered]
-\setbeamertemplate{caption label separator}{: }
-\setbeamercolor{caption name}{fg=normal text.fg}
-\beamertemplatenavigationsymbols$if(navigation)$$navigation$$else$empty$endif$
-$for(beameroption)$
-\setbeameroption{$beameroption$}
-$endfor$
-% Prevent slide breaks in the middle of a paragraph
-\widowpenalties 1 10000
-\raggedbottom
-$if(section-titles)$
-\setbeamertemplate{part page}{
-  \centering
-  \begin{beamercolorbox}[sep=16pt,center]{part title}
-    \usebeamerfont{part title}\insertpart\par
-  \end{beamercolorbox}
-}
-\setbeamertemplate{section page}{
-  \centering
-  \begin{beamercolorbox}[sep=12pt,center]{part title}
-    \usebeamerfont{section title}\insertsection\par
-  \end{beamercolorbox}
-}
-\setbeamertemplate{subsection page}{
-  \centering
-  \begin{beamercolorbox}[sep=8pt,center]{part title}
-    \usebeamerfont{subsection title}\insertsubsection\par
-  \end{beamercolorbox}
-}
-\AtBeginPart{
-  \frame{\partpage}
-}
-\AtBeginSection{
-  \ifbibliography
-  \else
-    \frame{\sectionpage}
-  \fi
-}
-\AtBeginSubsection{
-  \frame{\subsectionpage}
-}
-$endif$
-$endif$
-$if(beamerarticle)$
-\usepackage{beamerarticle} % needs to be loaded first
-$endif$
+
 \usepackage{amsmath,amssymb}
 $if(fontfamily)$
 \usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
@@ -382,26 +330,26 @@ $endif$
 $if(shorttitle)$\shorttitle{$shorttitle$}$endif$
 $if(leftheader)$\leftheader{$leftheader$}$endif$
 \authorsnames[$for(author)$$if(author.affiliation_number)${$author.affiliation_number$}$endif$$sep$,$endfor$]{$for(author)$$if(author.name)$$author.name$$else$$author$$endif$$sep$,$endfor$}
-\authorsaffiliations{$for(author)$
-$if(author.affiliation)$
-{$author.affiliation$}
-$endif$$sep$,$endfor$
+$if(affiliations)$
+\authorsaffiliations{$for(affiliations)$
+{$affiliations$}
+$sep$,$endfor$
 }
+$endif$
 \authornote{$if(authors_note)$$authors_note$$endif$}
 \date{$date$}
 $if(abstract)$\abstract{$abstract$}$endif$
 $if(keywords)$\keywords{$keywords$}$endif$
+$if(course)$\course{$course$}$endif$
+$if(professor)$\professor{$professor$}$endif$
+$if(duedate)$\duedate{$duedate$}$endif$
 
 \begin{document}
 $if(has-frontmatter)$
 \frontmatter
 $endif$
 $if(title)$
-$if(beamer)$
-\frame{\titlepage}
-$else$
 \maketitle
-$endif$
 $endif$
 
 $for(include-before)$
