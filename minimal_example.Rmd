@@ -1,0 +1,23 @@
+---
+doctype: man # this can be stu, jou, doc, or man
+title: "Your title"
+author: 
+  - name: "Your name"
+    affiliation_number: 1
+    affiliation: "Your affiliation"
+shorttitle: "APA short title"
+leftheader: "Authors' last names (for jou doctype)"
+authors_note: |
+  This is an author's note; 
+  you could remove it if not desired. 
+abstract: "Your article's abstract"
+keywords: "example, keywords"
+date: "3/29/21"
+output: 
+  pdf_document:
+    template: "template.tex"
+bibliography: example.bib # update to your .bib file!
+csl: apa.csl
+---
+
+Content
