@@ -1,0 +1,189 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[jou]{apa7}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Example document with some references},
+  pdfkeywords={LaTeX, RMarkdown, Document formatting},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
+  % set entry spacing
+  \ifnum #2 > 0
+  \setlength{\parskip}{#2\baselineskip}
+  \fi
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+\title{Example document with some references}
+\shorttitle{Example R Markdown APA doc}
+\leftheader{Dainer-Best et al.}
+\authorsnames[{1},{2},{2,3}]{Justin Dainer-Best,Second Author,Third
+Author}
+\authorsaffiliations{{Bard College}
+,{Other Institution}
+,{Third Institution}
+}
+\authornote{This is an author's note; you could remove it if not
+desired. You could include a corresponding author, and their email.}
+\date{March 29, 2021}
+\abstract{This is an example of creating an approximately APA-style
+manuscript using R Markdown and .bib files}
+\keywords{LaTeX, RMarkdown, Document formatting}
+
+\begin{document}
+\maketitle
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+This is a simple example of using R Markdown documents to create
+APA-formatted documents with LaTeX compiling them into PDFs. You will
+need to install a version of LaTeX to compile; some suggestions are
+included
+\href{https://bookdown.org/yihui/rmarkdown-cookbook/install-latex.html}{here},
+but if they do not work, you may want to install
+\href{http://tug.org/mactex/}{MacTeX} for Macs or
+\href{https://miktex.org/}{MiKTeX} for PCs. Of course, the Rmd document
+can also be compiled (knit) as an HTML file if you do not want to
+install a TeX distribution, but it will not follow APA style.
+
+You will have to compile your references in a bibliography. Most folks
+recommend using Zotero, as do I; you'll need to output your references
+to a .bib file. Document/article titles will follow the capitalization
+you've got---use APA style yourself! (The most recent versions of R
+Markdown can also
+\href{https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html}{help
+add your references}, including just from a DOI link.)
+
+Some packages (e.g., \{\href{https://github.com/crsh/papaja}{papaja}\};
+(\protect\hyperlink{ref-austbarth2020}{Aust \& Barth, 2020})) will
+create APA-draft manuscripts, but may introduce extra details beyond the
+basic style. The style I lay out here will simply create a document
+using APA formatting of references.
+
+\hypertarget{installation}{%
+\section{Installation}\label{installation}}
+
+You will need to download the \texttt{apa.csl} and \texttt{template.tex}
+documents into a directory where your Rmd file lives. Open (or create)
+your R Markdown document.
+
+Your document will automatically include some YAML headers:
+
+\begin{verbatim}
+---
+title: "Your title"
+author: "Your name"
+date: "3/29/2021"
+output: pdf_document
+---
+\end{verbatim}
+
+You can keep the title and date, but you will need to update the others
+headers to include some of the following YAML headers in your R Markdown
+document. In particular, you must include the \texttt{doctype}, the full
+set of \texttt{output} parameters
+(\texttt{output:\ pdf\_document:\ template:\ "template.tex"}), and the
+\texttt{bibliography} and \texttt{csl} lines. The others, including
+\texttt{shorttitle} and \texttt{leftheader}, \texttt{authors\_note}, and
+so forth, are implemented in APA style documents.
+
+\begin{verbatim}
+---
+doctype: jou # this can be stu, jou, doc, or man
+title: "Your title"
+author: 
+  - name: "Your name"
+    affiliation_number: 1
+    affiliation: "Your affiliation"
+shorttitle: "APA short title"
+leftheader: "Authors' last names (for jou doctype only)"
+authors_note: |
+  This is an author's note; 
+  you could remove it if not desired. 
+abstract: "Your article's abstract"
+keywords: "example, keywords"
+date: "3/29/21"
+output: 
+  pdf_document:
+    template: "template.tex"
+bibliography: example.bib # update to be your .bib file!
+csl: apa.csl
+---
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+You needn't write anything below the title of your references
+section---the bibliography will be automatically generated. If you
+notice that something is inappropriately not capitalized, make sure it
+is capitalized correctly in your .bib file; if it is, consider
+surrounding it with curly brackets to ensure
+
+\hypertarget{references}{%
+\section*{References}\label{references}}
+\addcontentsline{toc}{section}{References}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{1}{0}
+\leavevmode\hypertarget{ref-austbarth2020}{}%
+Aust, F., \& Barth, M. (2020). \emph{{papaja}: {Create} {APA}
+manuscripts with {R Markdown}}. \url{https://github.com/crsh/papaja}
+
+\end{CSLReferences}
+
+\end{document}
