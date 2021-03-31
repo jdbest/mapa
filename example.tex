@@ -218,8 +218,9 @@ If you look at example.Rmd, you'll see how to include multiple authors
 with differing affiliations. List each author separately. Including
 \texttt{affiliation\_number} will provide a superscript number after
 that name, which then anticipates a subsequent item under
-\texttt{affiliations}. (If there are three
-\texttt{affiliation\_number}s, there should be three listed
+\texttt{affiliations}. (With only one affiliation, you do not need to
+include any \texttt{affiliation\_number}. For each
+\texttt{affiliation\_number}, there should be an affiliation listed as
 \texttt{affiliations}.) If an author has multiple affiliations, simply
 enclose the numbers in quotation marks, as below, separated with a
 comma: ``2,3.''
@@ -334,7 +335,7 @@ plot is printed but the code is not. If \texttt{echo} were TRUE, the
 code would also be printed.
 
 R Markdown and LaTeX will try their best to fit the plot into the space
-allotted to it; you can play around with size by specifying a
+allotted to it; you can play around with size by specifying an
 \texttt{out.width} in percentages or inches, as I show here. You may
 read about more options
 \href{https://bookdown.org/yihui/rmarkdown/pdf-document.html\#figure-options-1}{here},
