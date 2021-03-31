@@ -1,0 +1,17 @@
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\includegraphics[width=1\linewidth]{example_files/figure-latex/penguinimage-1} \caption{Flipper length and body mass for Adelie, Chinstrap and Gentoo Penguins.}\label{fig:penguinimage}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+
+{\centering \subfloat[Penguin bill length negatively correlates with penguin bill depth\label{fig:morepenguins-1}]{\includegraphics[width=0.5\linewidth]{example_files/figure-latex/morepenguins-1} }\subfloat[Penguin bill length positively correlates with body mass\label{fig:morepenguins-2}]{\includegraphics[width=0.5\linewidth]{example_files/figure-latex/morepenguins-2} }\newline\subfloat[Boxplot of penguin bill lengths by species\label{fig:morepenguins-3}]{\includegraphics[width=0.5\linewidth]{example_files/figure-latex/morepenguins-3} }
+
+}
+
+\caption{Different ways of looking at penguin bills. Note that this sort of multiple-figure-in-one-section plot will look best in doctypes man, doc, and stu -- and be a bit abbreviated in doctype jou.}\label{fig:morepenguins}
+\end{figure*}

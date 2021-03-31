@@ -1,0 +1,18 @@
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+
+\caption{\label{tab:unnamed-chunk-3}Summary of flipper lengths across species and islands.}
+\centering
+\begin{tabular}[t]{llccc}
+\toprule
+Island & Species & \textit{n} & Flipper length (\textit{M}) & (\textit{SD})\\
+\midrule
+Biscoe & Adelie & 44 & 188.80 & 6.73\\
+Biscoe & Gentoo & 124 & 217.19 & 6.48\\
+Dream & Adelie & 56 & 189.73 & 6.59\\
+Dream & Chinstrap & 68 & 195.82 & 7.13\\
+Torgersen & Adelie & 52 & 191.20 & 6.23\\
+\bottomrule
+\end{tabular}
+\end{table*}
