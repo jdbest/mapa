@@ -112,7 +112,7 @@ csl: apa.csl
 
 A minimal example is included (minimal_example.Rmd and minimal_example.pdf) with these headers; feel free to download it and adapt. Without any changes, knitting it in R Markdown will make the PDF you can see here, so long as you have installed LaTeX---and downloaded the template.tex and apa.csl files into the same directory. (How to knit? Hit the "Knit" button in R Studio with the Rmd file open, or hit CMD+Shift+K / Ctrl+Shift+K.)
 
-If you look at example.Rmd, you'll see how to include multiple authors with differing affiliations. List each author separately. Including `affiliation_number` will provide a superscript number after that name, which then anticipates a subsequent item under `affiliations`. (If there are three `affiliation_number`s, there should be three listed `affiliations`.) If an author has multiple affiliations, simply enclose the numbers in quotation marks, as below, separated with a comma: "2,3".
+If you look at example.Rmd, you'll see how to include multiple authors with differing affiliations. List each author separately. Including `affiliation_number` will provide a superscript number after that name, which then anticipates a subsequent item under `affiliations`. (With only one affiliation, you do not need to include any `affiliation_number`. For each `affiliation_number`, there should be an affiliation listed as `affiliations`.) If an author has multiple affiliations, simply enclose the numbers in quotation marks, as below, separated with a comma: "2,3".
 
 ```
 author: 
@@ -163,7 +163,7 @@ Most other formatting will be done for you. If you want to learn things about fo
 
 As above, you can refer to the R Markdown cheatsheets to learn how to include pre-existing images. If you'd like to include *plots*, it's as easy as including a code chunk and using R code to create the figure (this uses the {_palmerpenguins_} and {_ggplot2_} packages by @horst2020 and @wickham2016, respectively, and code from the first.) Including `echo=FALSE, warning=FALSE` means that the plot is printed but the code is not. If `echo` were TRUE, the code would also be printed. 
 
-R Markdown and LaTeX will try their best to fit the plot into the space allotted to it; you can play around with size by specifying a `out.width` in percentages or inches, as I show here. You may read about more options [here](https://bookdown.org/yihui/rmarkdown/pdf-document.html#figure-options-1), but note that full-page figures may be difficult when `doctype` is set as `jou`. (But see more below.)
+R Markdown and LaTeX will try their best to fit the plot into the space allotted to it; you can play around with size by specifying an `out.width` in percentages or inches, as I show here. You may read about more options [here](https://bookdown.org/yihui/rmarkdown/pdf-document.html#figure-options-1), but note that full-page figures may be difficult when `doctype` is set as `jou`. (But see more below.)
 
 The below code produces the figure included in this document. Note that LaTeX places figures as best as it can---sometimes on a subsequent page. I abbreviate the figure caption in the code example:
 
