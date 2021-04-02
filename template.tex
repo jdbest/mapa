@@ -298,7 +298,7 @@ $if(affiliations)$
 $sep$,$endfor$
 }
 $endif$
-\authornote{$if(authors_note)$$authors_note$$endif$}
+$if(authors_note)$\authornote{$authors_note$}$endif$
 \date{$date$}
 $if(abstract)$\abstract{$abstract$}$endif$
 $if(keywords)$\keywords{$keywords$}$endif$
